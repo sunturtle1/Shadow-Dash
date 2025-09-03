@@ -2,6 +2,8 @@ extends CharacterBody2D
 @export var bullet :PackedScene
 @export var speed: float = 200.0
 
+@onready var muzzle = $Muzzle
+
 func _ready() -> void:
 	pass
 
@@ -32,4 +34,10 @@ func _unhandled_input(event: InputEvent) -> void:
 func shoot():
 	var bullet_instance = bullet.instantiate()
 	add_child(bullet_instance)
+	bullet_instance.position = muzzle.position   
+	bullet_instance.rotation = muzzle.rotation
+	var target = get_global_mouse_position()
+	var direction = bullet_instance.global_position.direction_to(target).normalized()
+	bullet_instance.set_direction(direction)
+	
 	print("shot fired")

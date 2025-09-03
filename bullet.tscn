@@ -1,16 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://iaiy6a7ol5h0"]
+[gd_scene load_steps=4 format=3 uid="uid://iaiy6a7ol5h0"]
 
 [ext_resource type="Texture2D" uid="uid://dl2kjk1upqd3v" path="res://assets/kenney_top-down-shooter/Spritesheet/tracer.png" id="1_v7oki"]
+[ext_resource type="Script" uid="uid://8l72h3ffxcm3" path="res://bullet.gd" id="1_v8qja"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v8qja"]
-size = Vector2(30, 6)
+size = Vector2(22, 6)
 
 [node name="bullet" type="Area2D"]
+script = ExtResource("1_v8qja")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_v7oki")
 region_enabled = true
-region_rect = Rect2(0, 0, 30.6978, 5.82246)
+region_rect = Rect2(0, 0, 22.0072, 5.82246)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_v8qja")
