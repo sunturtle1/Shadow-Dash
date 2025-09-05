@@ -33,11 +33,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 func shoot():
 	var bullet_instance = bullet.instantiate()
-	add_child(bullet_instance)
-	bullet_instance.position = muzzle.position   
+	get_parent().add_child(bullet_instance)
+	# muzzle
+	bullet_instance.position = muzzle.global_position 
+	# 
 	bullet_instance.rotation = muzzle.rotation
 	var target = get_global_mouse_position()
-	var direction = bullet_instance.global_position.direction_to(target).normalized()
+	var direction = Vector2.RIGHT.rotated(rotation)
 	bullet_instance.set_direction(direction)
 	
 	print("shot fired")
