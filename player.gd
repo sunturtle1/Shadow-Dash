@@ -1,9 +1,9 @@
 extends CharacterBody2D
 @export var bullet :PackedScene
 @export var speed: float = 200.0
-
+@onready var shot_cooldown = $ShotCooldown
 @onready var muzzle = $Muzzle
-
+@onready var ammo = 12
 func _ready() -> void:
 	pass
 
@@ -26,18 +26,26 @@ func _process(delta: float) -> void:
 	
 	look_at(get_global_mouse_position())
 	
+	if Input.is_action_pressed("reload"):
+		ammo = 12
+	
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_released("shoot"):
 		shoot()
 		
 		
 func shoot():
-	var bullet_instance = bullet.instantiate()
-	get_parent().add_child(bullet_instance)
-	# muzzle
-	bullet_instance.position = muzzle.global_position 
-	# 
-	bullet_instance.rotation = muzzle.rotation
-	var target = get_global_mouse_position()
-	var direction = Vector2.RIGHT.rotated(rotation)
-	bullet_instance.set_direction(direction)
+	if shot_cooldown.is_stopped() and  ammo > 0:
+		$Muzzle/AudioStreamPlayer2D.play()
+		var bullet_instance = bullet.instantiate()
+		get_parent().add_child(bullet_instance)
+		bullet_instance.position = muzzle.global_position 
+		bullet_instance.rotation = muzzle.rotation
+		var target = get_global_mouse_position()
+		var direction = Vector2.RIGHT.rotated(rotation)
+		bullet_instance.set_direction(direction)
+		ammo -= 1
+		shot_cooldown.start()
+		print(ammo)
+	else:
+		print("you are shooting too fast, or you are out of ammo.")

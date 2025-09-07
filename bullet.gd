@@ -1,8 +1,9 @@
 extends Area2D
 @export var speed: float = 1000
+@onready var timer_stop = $Timer
 
 var direction := Vector2.ZERO
-@onready var timer_stop = $Timer
+
 
 func _physics_process(delta: float) -> void:
 	if direction != Vector2.ZERO:
@@ -18,3 +19,12 @@ func set_direction(direction: Vector2) -> void:
 
 func _on_timer_timeout() -> void:
 	queue_free()
+	
+
+
+
+func _on_body_entered(body: Node2D) -> void:
+	print("yes a hit!")
+	queue_free()
+	body.take_damage(30)
+	

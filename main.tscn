@@ -1,13 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://cdyqmr4368e1p"]
+[gd_scene load_steps=4 format=3 uid="uid://cdyqmr4368e1p"]
 
 [ext_resource type="PackedScene" uid="uid://mchfxmkapl6j" path="res://player.tscn" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://iaiy6a7ol5h0" path="res://bullet.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://cq03mgtc2ewwv" path="res://enemy.tscn" id="3_h2yge"]
 
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_0xm2m")]
 position = Vector2(337, 160)
 bullet = ExtResource("2_h2yge")
+
+[node name="Enemy" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(865, 214)
+rotation = 3.11192
 
 [node name="bullet" parent="." instance=ExtResource("2_h2yge")]
 visible = false
