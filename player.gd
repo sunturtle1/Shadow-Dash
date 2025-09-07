@@ -41,5 +41,3 @@ func shoot():
 	var target = get_global_mouse_position()
 	var direction = Vector2.RIGHT.rotated(rotation)
 	bullet_instance.set_direction(direction)
-	
-	print("shot fired")
