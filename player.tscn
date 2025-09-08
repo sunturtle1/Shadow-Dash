@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://mchfxmkapl6j"]
+[gd_scene load_steps=7 format=3 uid="uid://mchfxmkapl6j"]
 
 [ext_resource type="Script" uid="uid://wp806gpcap3g" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://cups4hv2q5ooh" path="res://assets/kenney_top-down-shooter/Spritesheet/spritesheet_characters.png" id="2_i3pqv"]
 [ext_resource type="AudioStream" uid="uid://c5focgxlderbp" path="res://sounds/single-pistol-gunshot-42-40781.mp3" id="3_i3pqv"]
+[ext_resource type="AudioStream" uid="uid://x0bc1jwr50hj" path="res://sounds/rifle-clip-empty-98832.mp3" id="4_hqtel"]
+[ext_resource type="AudioStream" uid="uid://d3ds3jx1do4jc" path="res://sounds/9mm-pistol-load-and-chamber-98830.mp3" id="5_sweqy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 size = Vector2(22, 22)
@@ -22,9 +24,20 @@ shape = SubResource("RectangleShape2D_0xm2m")
 [node name="Muzzle" type="Marker2D" parent="."]
 position = Vector2(26, 10)
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Muzzle"]
+[node name="shooting_sound" type="AudioStreamPlayer2D" parent="Muzzle"]
 stream = ExtResource("3_i3pqv")
 
+[node name="empty_sound" type="AudioStreamPlayer2D" parent="Muzzle"]
+stream = ExtResource("4_hqtel")
+
+[node name="reload_sound" type="AudioStreamPlayer2D" parent="Muzzle"]
+stream = ExtResource("5_sweqy")
+
 [node name="ShotCooldown" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.15
 one_shot = true
+
+[node name="reload_timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="reload_timer" to="." method="_on_reload_timer_timeout"]

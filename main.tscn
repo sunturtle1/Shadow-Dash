@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cdyqmr4368e1p"]
+[gd_scene load_steps=5 format=3 uid="uid://cdyqmr4368e1p"]
 
 [ext_resource type="PackedScene" uid="uid://mchfxmkapl6j" path="res://player.tscn" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://iaiy6a7ol5h0" path="res://bullet.tscn" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://cq03mgtc2ewwv" path="res://enemy.tscn" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://bjg325tw4uqqc" path="res://assets/weapons/pistol-6801870_1280.png" id="4_1bvp3"]
 
 [node name="Main" type="Node2D"]
 
@@ -16,3 +17,28 @@ rotation = 3.11192
 
 [node name="bullet" parent="." instance=ExtResource("2_h2yge")]
 visible = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ammo_label" type="RichTextLabel" parent="CanvasLayer/Control"]
+offset_left = 976.0
+offset_top = 592.0
+offset_right = 1064.0
+offset_bottom = 616.0
+text = "ammo "
+fit_content = true
+
+[node name="weapon_icon" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 971.0
+offset_top = 544.0
+offset_right = 1027.0
+offset_bottom = 592.0
+texture = ExtResource("4_1bvp3")
+expand_mode = 1
