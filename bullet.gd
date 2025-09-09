@@ -26,5 +26,6 @@ func _on_timer_timeout() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	print("yes a hit!")
 	queue_free()
-	body.take_damage(30)
+	if body.is_in_group("enemies"):
+		body.take_damage(30)
 	
